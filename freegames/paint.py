@@ -13,14 +13,14 @@ Exercises
 from turtle import *
 from freegames import vector
 
-def line(start, end):
+def line(start: vector, end: vector):
     "Draw line from start to end."
     up()
     goto(start.x, start.y)
     down()
     goto(end.x, end.y)
 
-def square(start, end):
+def square(start: vector, end: vector):
     "Draw square from start to end."
     up()
     goto(start.x, start.y)
@@ -33,19 +33,19 @@ def square(start, end):
 
     end_fill()
 
-def circle(start, end):
+def circle(start: vector, end: vector):
     "Draw circle from start to end."
     pass  # TODO
 
-def rectangle(start, end):
+def rectangle(start: vector, end: vector):
     "Draw rectangle from start to end."
     pass  # TODO
 
-def triangle(start, end):
+def triangle(start: vector, end: vector):
     "Draw triangle from start to end."
     pass  # TODO
 
-def tap(x, y):
+def tap(x: float, y: float):
     "Store starting point or draw shape."
     start = state['start']
 

@@ -19,26 +19,26 @@ def grid():
     line(-200, -67, 200, -67)
     line(-200, 67, 200, 67)
 
-def drawx(x, y):
+def drawx(x: int, y: int):
     "Draw X player."
     line(x, y, x + 133, y + 133)
     line(x, y + 133, x + 133, y)
 
-def drawo(x, y):
+def drawo(x: int, y: int):
     "Draw O player."
     up()
     goto(x + 67, y + 5)
     down()
     circle(62)
 
-def floor(value):
+def floor(value: int) -> int:
     "Round value down to grid with square size 133."
     return ((value + 200) // 133) * 133 - 200
 
 state = {'player': 0}
 players = [drawx, drawo]
 
-def tap(x, y):
+def tap(x: int, y: int):
     "Draw X or O in tapped square."
     x = floor(x)
     y = floor(y)

@@ -14,7 +14,7 @@ from random import *
 from turtle import *
 from freegames import vector
 
-def value():
+def value() -> float:
     "Randomly generate value between (-5, -3) or (3, 5)."
     return (3 + random() * 2) * choice([1, -1])
 

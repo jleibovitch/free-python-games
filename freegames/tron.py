@@ -20,7 +20,7 @@ p2xy = vector(100, 0)
 p2aim = vector(-4, 0)
 p2body = set()
 
-def inside(head):
+def inside(head: vector) -> bool:
     "Return True if head inside screen."
     return -200 < head.x < 200 and -200 < head.y < 200
 
