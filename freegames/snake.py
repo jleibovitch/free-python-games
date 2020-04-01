@@ -23,9 +23,11 @@ def change(x: int, y: int):
     "Change snake direction."
     aim.x = x
     aim.y = y
+    keyPress()
 
-# Starts moving the snake in response to a key press, only if the game hasn't already started
 def keyPress():
+    "Starts moving the snake in response to a key press, only if the game hasn't already started"
+    # pylint: disable=global-statement
     global started
     if started is False:
         move()
@@ -71,5 +73,5 @@ onkeypress(lambda: change(10, 0), 'Right')
 onkeypress(lambda: change(-10, 0), 'Left')
 onkeypress(lambda: change(0, 10), 'Up')
 onkeypress(lambda: change(0, -10), 'Down')
-move()
+onkeypress(keyPress)
 done()
