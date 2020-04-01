@@ -109,7 +109,7 @@ Day 3
 
 - Activity: Simon Says
 - Famous Christian programmer: Fred Brooks
-- Functions: onscreenclick, onkey, ontimer
+- Functions: onscreenclick, onkeypress, ontimer
 
 Games
 .....

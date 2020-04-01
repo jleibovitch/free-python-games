@@ -11,14 +11,15 @@ Exercises
 
 from turtle import *
 from random import randrange
+from typing import List
 from freegames import square, vector
 
 started = False
 food = vector(0, 0)
-snake = [vector(10, 0)]
+snake: List[vector] = [vector(10, 0)]
 aim = vector(0, -10)
 
-def change(x, y):
+def change(x: int, y: int):
     "Change snake direction."
     aim.x = x
     aim.y = y
@@ -30,7 +31,7 @@ def keyPress():
         move()
     started = True
 
-def inside(head):
+def inside(head: vector) -> bool:
     "Return True if head inside boundaries."
     return -200 < head.x < 190 and -200 < head.y < 190
 
@@ -66,9 +67,9 @@ setup(420, 420, 0, 0)
 hideturtle()
 tracer(False)
 listen()
-onkey(lambda: change(10, 0), 'Right')
-onkey(lambda: change(-10, 0), 'Left')
-onkey(lambda: change(0, 10), 'Up')
-onkey(lambda: change(0, -10), 'Down')
-onkeypress(lambda: keyPress())
+onkeypress(lambda: change(10, 0), 'Right')
+onkeypress(lambda: change(-10, 0), 'Left')
+onkeypress(lambda: change(0, 10), 'Up')
+onkeypress(lambda: change(0, -10), 'Down')
+move()
 done()

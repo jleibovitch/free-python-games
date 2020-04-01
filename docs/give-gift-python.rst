@@ -114,7 +114,7 @@ Inputs
 
 - listen
 - onclick
-- onkey
+- onkeypress
 
 Animation
 .........

@@ -31,7 +31,7 @@ def grid():
 
     update()
 
-def tap(x, y):
+def tap(x: int, y: int):
     "Draw red or yellow circle in tapped row."
     player = state['player']
     rows = state['rows']
