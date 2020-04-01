@@ -14,6 +14,7 @@ from random import randrange
 from typing import List
 from freegames import square, vector
 
+started = False
 food = vector(0, 0)
 snake: List[vector] = [vector(10, 0)]
 aim = vector(0, -10)
@@ -22,6 +23,13 @@ def change(x: int, y: int):
     "Change snake direction."
     aim.x = x
     aim.y = y
+
+# Starts moving the snake in response to a key press, only if the game hasn't already started
+def keyPress():
+    global started
+    if started is False:
+        move()
+    started = True
 
 def inside(head: vector) -> bool:
     "Return True if head inside boundaries."
@@ -55,7 +63,7 @@ def move():
     update()
     ontimer(move, 100)
 
-setup(420, 420, 370, 0)
+setup(420, 420, 0, 0)
 hideturtle()
 tracer(False)
 listen()
