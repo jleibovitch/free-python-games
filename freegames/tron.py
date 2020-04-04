@@ -20,7 +20,7 @@ p2xy = vector(100, 0)
 p2aim = vector(-4, 0)
 p2body = set()
 
-def inside(head: vector) -> bool:
+def inside(head):
     "Return True if head inside screen."
     return -200 < head.x < 200 and -200 < head.y < 200
 
@@ -52,9 +52,9 @@ setup(420, 420, 370, 0)
 hideturtle()
 tracer(False)
 listen()
-onkeypress(lambda: p1aim.rotate(90), 'a')
-onkeypress(lambda: p1aim.rotate(-90), 'd')
-onkeypress(lambda: p2aim.rotate(90), 'j')
-onkeypress(lambda: p2aim.rotate(-90), 'l')
+onkey(lambda: p1aim.rotate(90), 'a')
+onkey(lambda: p1aim.rotate(-90), 'd')
+onkey(lambda: p2aim.rotate(90), 'j')
+onkey(lambda: p2aim.rotate(-90), 'l')
 draw()
 done()

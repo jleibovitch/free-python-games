@@ -9,13 +9,12 @@ Exercises
 
 """
 
-from typing import List, Dict
 from random import *
 from turtle import *
 from freegames import floor, vector
 
-tiles: Dict[vector, int] = {}
-neighbors: List[vector] = [
+tiles = {}
+neighbors = [
     vector(100, 0),
     vector(-100, 0),
     vector(0, 100),
@@ -44,7 +43,7 @@ def load():
             tiles[mark] = number
             mark = spot
 
-def square(mark: vector, number: int):
+def square(mark, number):
     "Draw white square with black outline and number."
     up()
     goto(mark.x, mark.y)
@@ -64,7 +63,7 @@ def square(mark: vector, number: int):
 
     write(number, font=('Arial', 60, 'normal'))
 
-def tap(x: int, y: int):
+def tap(x, y):
     "Swap tile and empty square."
     x = floor(x, 100)
     y = floor(y, 100)

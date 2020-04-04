@@ -16,7 +16,7 @@ from freegames import vector
 ant = vector(0, 0)
 aim = vector(2, 0)
 
-def wrap(value: int):
+def wrap(value):
     "Wrap value around -200 and 200."
     return value  # TODO
 

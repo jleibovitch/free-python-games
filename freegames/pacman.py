@@ -48,7 +48,7 @@ tiles = [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 ]
 
-def square(x: int, y: int):
+def square(x, y):
     "Draw square using path at (x, y)."
     path.up()
     path.goto(x, y)
@@ -61,14 +61,14 @@ def square(x: int, y: int):
 
     path.end_fill()
 
-def offset(point: vector) -> int:
+def offset(point):
     "Return offset of point in tiles."
     x = (floor(point.x, 20) + 200) / 20
     y = (180 - floor(point.y, 20)) / 20
     index = int(x + y * 20)
     return index
 
-def valid(point: vector) -> bool:
+def valid(point):
     "Return True if point is valid in tiles."
     index = offset(point)
 
@@ -149,7 +149,7 @@ def move():
 
     ontimer(move, 100)
 
-def change(x: int, y: int):
+def change(x, y):
     "Change pacman aim if valid."
     if valid(pacman + vector(x, y)):
         aim.x = x
@@ -162,10 +162,10 @@ writer.goto(160, 160)
 writer.color('white')
 writer.write(state['score'])
 listen()
-onkeypress(lambda: change(5, 0), 'Right')
-onkeypress(lambda: change(-5, 0), 'Left')
-onkeypress(lambda: change(0, 5), 'Up')
-onkeypress(lambda: change(0, -5), 'Down')
+onkey(lambda: change(5, 0), 'Right')
+onkey(lambda: change(-5, 0), 'Left')
+onkey(lambda: change(0, 5), 'Up')
+onkey(lambda: change(0, -5), 'Down')
 world()
 move()
 done()

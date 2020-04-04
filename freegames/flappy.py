@@ -16,12 +16,12 @@ from freegames import vector
 bird = vector(0, 0)
 balls = []
 
-def tap(x: int, y: int):
+def tap(x, y):
     "Move bird up in response to screen tap."
     up = vector(0, 30)
     bird.move(up)
 
-def inside(point: int):
+def inside(point):
     "Return True if point on screen."
     return -200 < point.x < 200 and -200 < point.y < 200
 

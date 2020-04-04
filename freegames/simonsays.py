@@ -50,7 +50,7 @@ def grow():
     print('Pattern length:', len(pattern))
     guesses.clear()
 
-def tap(x: int, y: int):
+def tap(x, y):
     "Respond to screen tap."
     onscreenclick(None)
     x = floor(x, 200)
@@ -69,7 +69,7 @@ def tap(x: int, y: int):
 
     onscreenclick(tap)
 
-def start(x: int, y: int):
+def start(x, y):
     "Start game."
     grow()
     onscreenclick(tap)
