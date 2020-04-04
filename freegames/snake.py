@@ -11,31 +11,27 @@ Exercises
 
 from turtle import *
 from random import randrange
-from typing import List
 from freegames import square, vector
 
-started = False
 food = vector(0, 0)
-snake: List[vector] = [vector(10, 0)]
+snake = [vector(10, 0)]
 aim = vector(0, -10)
 
-def change(x: int, y: int):
+def change(x, y):
     "Change snake direction."
     aim.x = x
     aim.y = y
-    keyPress()
 
-def keyPress():
-    "Starts moving the snake in response to a key press, only if the game hasn't already started"
-    # pylint: disable=global-statement
-    global started
-    if started is False:
-        move()
-    started = True
-
-def inside(head: vector) -> bool:
+def inside(head):
     "Return True if head inside boundaries."
     return -200 < head.x < 190 and -200 < head.y < 190
+
+# Returns true if the given vector is inside of the snake
+def vectorInsideSnake(vector):
+    for snakeVector in snake:
+        if snakeVector.x == vector.x and snakeVector.y == vector.y:
+            return True
+    return False
 
 def move():
     "Move snake forward one segment."
@@ -51,8 +47,14 @@ def move():
 
     if head == food:
         print('Snake:', len(snake))
-        food.x = randrange(-15, 15) * 10
-        food.y = randrange(-15, 15) * 10
+        generateAnotherLocation = True
+        newVector = None
+        while generateAnotherLocation:
+            newVector = vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10)
+            if not vectorInsideSnake(newVector):
+                generateAnotherLocation = False
+        food.x = newVector.x
+        food.y = newVector.y
     else:
         snake.pop(0)
 
@@ -65,13 +67,13 @@ def move():
     update()
     ontimer(move, 100)
 
-setup(420, 420, 0, 0)
+setup(420, 420, 370, 0)
 hideturtle()
 tracer(False)
 listen()
-onkeypress(lambda: change(10, 0), 'Right')
-onkeypress(lambda: change(-10, 0), 'Left')
-onkeypress(lambda: change(0, 10), 'Up')
-onkeypress(lambda: change(0, -10), 'Down')
-onkeypress(keyPress)
+onkey(lambda: change(10, 0), 'Right')
+onkey(lambda: change(-10, 0), 'Left')
+onkey(lambda: change(0, 10), 'Up')
+onkey(lambda: change(0, -10), 'Down')
+move()
 done()
