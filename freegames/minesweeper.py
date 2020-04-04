@@ -40,7 +40,7 @@ def initialize():
             counts[x, y] = total
 
 
-def stamp(x, y, text):
+def stamp(x: int, y: int, text: str):
     "Display `text` at coordinates `x` and `y`."
     square(x, y, 50, 'white')
     color('black')
@@ -62,7 +62,7 @@ def end():
                 stamp(x, y, 'X')
 
 
-def tap(x, y):
+def tap(x: int, y: int):
     "Respond to screen click at `x` and `y` coordinates."
     x = floor(x, 50)
     y = floor(y, 50)
