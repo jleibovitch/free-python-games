@@ -2,7 +2,6 @@
 
 """
 
-
 state = {}
 events = []
 
