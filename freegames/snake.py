@@ -30,19 +30,29 @@ def keyPress():
     # pylint: disable=global-statement
     global started
     if started is False:
+        randomize_food()
         move()
     started = True
 
 def inside(head: vector) -> bool:
     "Return True if head inside boundaries."
-    return -200 < head.x < 190 and -200 < head.y < 190
+    return -210 < head.x < 200 and -200 < head.y < 200
 
-# Returns true if the given vector is inside of the snake
-def vectorInsideSnake(vector):
-    for snakeVector in snake:
-        if snakeVector.x == vector.x and snakeVector.y == vector.y:
+def vector_inside_snake(snake_head: vector):
+    "Returns true if the given vector is inside of the snake"
+    for snake_vector in snake:
+        if snake_vector.x == vector.x and snake_vector.y == vector.y:
             return True
     return False
+
+def randomize_food():
+    "Randomizes the location of the food"
+    while True:
+        newVector = vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10)
+        if not vector_inside_snake(newVector):
+            food.x = newVector.x
+            food.y = newVector.y
+            break
 
 def move():
     "Move snake forward one segment."
@@ -58,14 +68,7 @@ def move():
 
     if head == food:
         print('Snake:', len(snake))
-        generateAnotherLocation = True
-        newVector = None
-        while generateAnotherLocation:
-            newVector = vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10)
-            if not vectorInsideSnake(newVector):
-                generateAnotherLocation = False
-        food.x = newVector.x
-        food.y = newVector.y
+        randomize_food()
     else:
         snake.pop(0)
 
