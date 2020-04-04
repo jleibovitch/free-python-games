@@ -19,7 +19,7 @@ tiles = list(range(32)) * 2
 state = {'mark': None}
 hide = [True] * 64
 
-def square(x, y):
+def square(x: int, y: int):
     "Draw white square with black outline at (x, y)."
     up()
     goto(x, y)
@@ -31,15 +31,15 @@ def square(x, y):
         left(90)
     end_fill()
 
-def index(x, y):
+def index(x: int, y: int) -> int:
     "Convert (x, y) coordinates to tiles index."
     return int((x + 200) // 50 + ((y + 200) // 50) * 8)
 
-def xy(count):
+def xy(count: int) -> int:
     "Convert tiles count to (x, y) coordinates."
     return (count % 8) * 50 - 200, (count // 8) * 50 - 200
 
-def tap(x, y):
+def tap(x: int, y: int):
     "Update mark and hidden tiles based on tap."
     spot = index(x, y)
     mark = state['mark']

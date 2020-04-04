@@ -6,9 +6,10 @@
 import collections
 import math
 import os
+from typing import Union
 
 
-def floor(value, size, offset=200):
+def floor(value: int, size: int, offset: int = 200):
     """Floor of `value` given `size` and `offset`.
 
     The floor function is best understood with a diagram of the number line::
@@ -37,7 +38,7 @@ def floor(value, size, offset=200):
     return float(((value + offset) // size) * size - offset)
 
 
-def path(filename):
+def path(filename: str):
     "Return full path to `filename` in freegames module."
     filepath = os.path.realpath(__file__)
     dirpath = os.path.dirname(filepath)
@@ -45,22 +46,24 @@ def path(filename):
     return fullpath
 
 
-def line(a, b, x, y):
+def line(a: int, b: int, x: int, y: int):
     "Draw line from `(a, b)` to `(x, y)`."
     import turtle
+    turtle.delay(0)
     turtle.up()
     turtle.goto(a, b)
     turtle.down()
     turtle.goto(x, y)
 
 
-def square(x, y, size, name):
+def square(x: int, y: int, size: int, name: str):
     """Draw square at `(x, y)` with side length `size` and fill color `name`.
 
     The square is oriented so the bottom left corner is at (x, y).
 
     """
     import turtle
+    turtle.delay(0)
     turtle.up()
     turtle.goto(x, y)
     turtle.down()
@@ -173,7 +176,7 @@ class vector(collections.Sequence):
         """
         return 2
 
-    def __getitem__(self, index):
+    def __getitem__(self, index) -> Union[int, float]:
         """v.__getitem__(v, i) -> v[i]
 
         >>> v = vector(3, 4)
@@ -193,7 +196,7 @@ class vector(collections.Sequence):
             return self.y
         raise IndexError
 
-    def copy(self):
+    def copy(self) -> 'vector':
         """Return copy of vector.
 
         >>> v = vector(1, 2)
@@ -205,7 +208,7 @@ class vector(collections.Sequence):
         type_self = type(self)
         return type_self(self.x, self.y)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> Union[NotImplementedError, bool]:
         """v.__eq__(w) -> v == w
 
         >>> v = vector(1, 2)
@@ -218,7 +221,7 @@ class vector(collections.Sequence):
             return self.x == other.x and self.y == other.y
         return NotImplemented
 
-    def __ne__(self, other):
+    def __ne__(self, other) -> Union[NotImplementedError, bool]:
         """v.__ne__(w) -> v != w
 
         >>> v = vector(1, 2)
@@ -231,7 +234,7 @@ class vector(collections.Sequence):
             return self.x != other.x or self.y != other.y
         return NotImplemented
 
-    def __iadd__(self, other):
+    def __iadd__(self, other) -> 'vector':
         """v.__iadd__(w) -> v += w
 
         >>> v = vector(1, 2)
@@ -254,7 +257,7 @@ class vector(collections.Sequence):
             self.y += other
         return self
 
-    def __add__(self, other):
+    def __add__(self, other: 'vector') -> 'vector':
         """v.__add__(w) -> v + w
 
         >>> v = vector(1, 2)
@@ -272,7 +275,7 @@ class vector(collections.Sequence):
 
     __radd__ = __add__
 
-    def move(self, other):
+    def move(self, other: 'vector'):
         """Move vector by other (in-place).
 
         >>> v = vector(1, 2)
@@ -287,7 +290,7 @@ class vector(collections.Sequence):
         """
         self.__iadd__(other)
 
-    def __isub__(self, other):
+    def __isub__(self, other: 'vector') -> 'vector':
         """v.__isub__(w) -> v -= w
 
         >>> v = vector(1, 2)
@@ -310,7 +313,7 @@ class vector(collections.Sequence):
             self.y -= other
         return self
 
-    def __sub__(self, other):
+    def __sub__(self, other: 'vector') -> 'vector':
         """v.__sub__(w) -> v - w
 
         >>> v = vector(1, 2)
@@ -324,7 +327,7 @@ class vector(collections.Sequence):
         copy = self.copy()
         return copy.__isub__(other)
 
-    def __imul__(self, other):
+    def __imul__(self, other: 'vector') -> 'vector':
         """v.__imul__(w) -> v *= w
 
         >>> v = vector(1, 2)
@@ -347,7 +350,7 @@ class vector(collections.Sequence):
             self.y *= other
         return self
 
-    def __mul__(self, other):
+    def __mul__(self, other: float) -> 'vector':
         """v.__mul__(w) -> v * w
 
         >>> v = vector(1, 2)
@@ -365,7 +368,7 @@ class vector(collections.Sequence):
 
     __rmul__ = __mul__
 
-    def scale(self, other):
+    def scale(self, other: Union[float, int]):
         """Scale vector by other (in-place).
 
         >>> v = vector(1, 2)
@@ -380,7 +383,7 @@ class vector(collections.Sequence):
         """
         self.__imul__(other)
 
-    def __itruediv__(self, other):
+    def __itruediv__(self, other: 'vector') -> 'vector':
         """v.__itruediv__(w) -> v /= w
 
         >>> v = vector(2, 4)
@@ -403,7 +406,7 @@ class vector(collections.Sequence):
             self.y /= other
         return self
 
-    def __truediv__(self, other):
+    def __truediv__(self, other: 'vector') -> 'vector':
         """v.__truediv__(w) -> v / w
 
         >>> v = vector(1, 2)
@@ -417,7 +420,7 @@ class vector(collections.Sequence):
         copy = self.copy()
         return copy.__itruediv__(other)
 
-    def __neg__(self):
+    def __neg__(self) -> 'vector':
         """v.__neg__() -> -v
 
         >>> v = vector(1, 2)
@@ -425,13 +428,13 @@ class vector(collections.Sequence):
         vector(-1, -2)
 
         """
-        # pylint: disable=invalid-unary-operand-type
+
         copy = self.copy()
         copy.x = -copy.x
         copy.y = -copy.y
         return copy
 
-    def __abs__(self):
+    def __abs__(self) -> float:
         """v.__abs__() -> abs(v)
 
         >>> v = vector(3, 4)
@@ -441,7 +444,7 @@ class vector(collections.Sequence):
         """
         return (self.x ** 2 + self.y ** 2) ** 0.5
 
-    def rotate(self, angle):
+    def rotate(self, angle: float):
         """Rotate vector counter-clockwise by angle (in-place).
 
         >>> v = vector(1, 2)
@@ -460,7 +463,7 @@ class vector(collections.Sequence):
         self.x = x * cosine - y * sine
         self.y = y * cosine + x * sine
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """v.__repr__() -> repr(v)
 
         >>> v = vector(1, 2)

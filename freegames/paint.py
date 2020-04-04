@@ -13,14 +13,14 @@ Exercises
 from turtle import *
 from freegames import vector
 
-def line(start, end):
+def line(start: vector, end: vector):
     "Draw line from start to end."
     up()
     goto(start.x, start.y)
     down()
     goto(end.x, end.y)
 
-def square(start, end):
+def square(start: vector, end: vector):
     "Draw square from start to end."
     up()
     goto(start.x, start.y)
@@ -33,19 +33,19 @@ def square(start, end):
 
     end_fill()
 
-def circle(start, end):
+def circle(start: vector, end: vector):
     "Draw circle from start to end."
     pass  # TODO
 
-def rectangle(start, end):
+def rectangle(start: vector, end: vector):
     "Draw rectangle from start to end."
     pass  # TODO
 
-def triangle(start, end):
+def triangle(start: vector, end: vector):
     "Draw triangle from start to end."
     pass  # TODO
 
-def tap(x, y):
+def tap(x: float, y: float):
     "Store starting point or draw shape."
     start = state['start']
 
@@ -65,15 +65,15 @@ state = {'start': None, 'shape': line}
 setup(420, 420, 370, 0)
 onscreenclick(tap)
 listen()
-onkey(undo, 'u')
-onkey(lambda: color('black'), 'K')
-onkey(lambda: color('white'), 'W')
-onkey(lambda: color('green'), 'G')
-onkey(lambda: color('blue'), 'B')
-onkey(lambda: color('red'), 'R')
-onkey(lambda: store('shape', line), 'l')
-onkey(lambda: store('shape', square), 's')
-onkey(lambda: store('shape', circle), 'c')
-onkey(lambda: store('shape', rectangle), 'r')
-onkey(lambda: store('shape', triangle), 't')
+onkeypress(undo, 'u')
+onkeypress(lambda: color('black'), 'K')
+onkeypress(lambda: color('white'), 'W')
+onkeypress(lambda: color('green'), 'G')
+onkeypress(lambda: color('blue'), 'B')
+onkeypress(lambda: color('red'), 'R')
+onkeypress(lambda: store('shape', line), 'l')
+onkeypress(lambda: store('shape', square), 's')
+onkeypress(lambda: store('shape', circle), 'c')
+onkeypress(lambda: store('shape', rectangle), 'r')
+onkeypress(lambda: store('shape', triangle), 't')
 done()

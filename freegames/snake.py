@@ -11,20 +11,48 @@ Exercises
 
 from turtle import *
 from random import randrange
+from typing import List
 from freegames import square, vector
 
+started = False
 food = vector(0, 0)
-snake = [vector(10, 0)]
+snake: List[vector] = [vector(10, 0)]
 aim = vector(0, -10)
 
-def change(x, y):
+def change(x: int, y: int):
     "Change snake direction."
     aim.x = x
     aim.y = y
+    keyPress()
 
-def inside(head):
+def keyPress():
+    "Starts moving the snake in response to a key press, only if the game hasn't already started"
+    # pylint: disable=global-statement
+    global started
+    if started is False:
+        randomize_food()
+        move()
+    started = True
+
+def inside(head: vector) -> bool:
     "Return True if head inside boundaries."
-    return -200 < head.x < 190 and -200 < head.y < 190
+    return -210 < head.x < 200 and -200 < head.y < 200
+
+def vector_inside_snake(snake_head: vector):
+    "Returns true if the given vector is inside of the snake"
+    for snake_vector in snake:
+        if snake_vector.x == vector.x and snake_vector.y == vector.y:
+            return True
+    return False
+
+def randomize_food():
+    "Randomizes the location of the food"
+    while True:
+        newVector = vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10)
+        if not vector_inside_snake(newVector):
+            food.x = newVector.x
+            food.y = newVector.y
+            break
 
 def move():
     "Move snake forward one segment."
@@ -40,8 +68,7 @@ def move():
 
     if head == food:
         print('Snake:', len(snake))
-        food.x = randrange(-15, 15) * 10
-        food.y = randrange(-15, 15) * 10
+        randomize_food()
     else:
         snake.pop(0)
 
@@ -54,13 +81,13 @@ def move():
     update()
     ontimer(move, 100)
 
-setup(420, 420, 370, 0)
+setup(420, 420, 0, 0)
 hideturtle()
 tracer(False)
 listen()
-onkey(lambda: change(10, 0), 'Right')
-onkey(lambda: change(-10, 0), 'Left')
-onkey(lambda: change(0, 10), 'Up')
-onkey(lambda: change(0, -10), 'Down')
-move()
+onkeypress(lambda: change(10, 0), 'Right')
+onkeypress(lambda: change(-10, 0), 'Left')
+onkeypress(lambda: change(0, 10), 'Up')
+onkeypress(lambda: change(0, -10), 'Down')
+onkeypress(keyPress)
 done()

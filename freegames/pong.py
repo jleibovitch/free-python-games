@@ -24,11 +24,11 @@ ball = vector(0, 0)
 aim = vector(value(), value())
 state = {1: 0, 2: 0}
 
-def move(player, change):
+def move(player: int, change: int):
     "Move player position by change."
     state[player] += change
 
-def rectangle(x, y, width, height):
+def rectangle(x: int, y: int, width: int, height: int):
     "Draw rectangle at (x, y) with given width and height."
     up()
     goto(x, y)
@@ -83,9 +83,9 @@ setup(420, 420, 370, 0)
 hideturtle()
 tracer(False)
 listen()
-onkey(lambda: move(1, 20), 'w')
-onkey(lambda: move(1, -20), 's')
-onkey(lambda: move(2, 20), 'i')
-onkey(lambda: move(2, -20), 'k')
+onkeypress(lambda: move(1, 20), 'w')
+onkeypress(lambda: move(1, -20), 's')
+onkeypress(lambda: move(2, 20), 'i')
+onkeypress(lambda: move(2, -20), 'k')
 draw()
 done()
