@@ -12,7 +12,7 @@ Adapted from code in https://inventwithpython.com/chapter14.html
 
 """
 
-def encrypt(message, key):
+def encrypt(message: str, key: str) -> str:
     "Encrypt message with key."
     result = ''
 
@@ -48,11 +48,11 @@ def encrypt(message, key):
 
     return result
 
-def decrypt(message, key):
+def decrypt(message: str, key: str) -> str:
     "Decrypt message with key."
     return encrypt(message, -key)
 
-def decode(message):
+def decode(message: str):
     "Decode message without key."
     pass  # TODO
 
